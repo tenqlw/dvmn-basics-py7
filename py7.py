@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TG_TOKEN = os.getenv('TELEGRAM_TOKEN') # подставьте свой ключ API
-TG_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID') # подставьте свой ID
+TG_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TG_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID') 
 
 bot = ptbot.Bot(TG_TOKEN)
 
@@ -33,4 +33,5 @@ def main(chat_id, message_id):
 
 if __name__ == '__main__':
     bot.reply_on_message(wait);
+
     bot.run()
