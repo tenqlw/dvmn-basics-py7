@@ -3,7 +3,7 @@ import telegram
 import traceback
 import sys
 
-from telegram.ext import Filters
+from telegram.ext import filters
 from telegram.ext import MessageHandler
 from telegram.ext import Updater
 
@@ -79,7 +79,7 @@ class Bot():
             chat_id = update.message.chat_id
             callback(chat_id, users_reply, **kwargs)
 
-        self.dispatcher.add_handler(MessageHandler(Filters.text, handle_text))
+        self.dispatcher.add_handler(MessageHandler(filters.text, handle_text))
 
     def run_bot(self):
         def error_handler(update, context):
@@ -89,3 +89,6 @@ class Bot():
         self.dispatcher.add_error_handler(error_handler)
         self.updater.start_polling()
         self.updater.idle()
+
+    def run(self):
+        pass
