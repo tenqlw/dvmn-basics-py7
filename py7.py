@@ -1,7 +1,8 @@
 import ptbot
+
+
 from pytimeparse import parse
 from decouple import config
-
 
 
 def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='█', zfill='░'):
@@ -22,11 +23,11 @@ def last_message(bot, chat_id):
     bot.send_message(chat_id, 'Время вышло!')
 
 
-
 def main():
     TG_TOKEN = config('TELEGRAM_TOKEN')
     TG_CHAT_ID = config('TELEGRAM_CHAT_ID')
     bot = ptbot.Bot(TG_TOKEN)
+
 
     def wait(chat_id, msg):
         seconds = parse(msg)
@@ -36,7 +37,6 @@ def main():
         message_id = bot.send_message(chat_id, f'Таймер запущен на {seconds} секунд')
         bot.create_countdown(seconds, notify_progress, chat_id=chat_id, message_id=message_id, total_secs=seconds, bot=bot)
         bot.create_timer(seconds, last_message, chat_id=chat_id, bot=bot)
-        
     bot.reply_on_message(wait)
     bot.run_bot()
 
