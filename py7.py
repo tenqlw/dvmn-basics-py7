@@ -1,6 +1,4 @@
 import ptbot
-
-
 from pytimeparse import parse
 from decouple import config
 
@@ -44,4 +42,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
