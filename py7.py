@@ -7,7 +7,6 @@ from decouple import config
 
 TG_TOKEN = config('TELEGRAM_TOKEN')
 TG_CHAT_ID = config('TELEGRAM_CHAT_ID')
-bot = ptbot.Bot(TG_TOKEN)
 
 
 def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='█', zfill='░'):
@@ -28,7 +27,7 @@ def last_message(bot, chat_id):
     bot.send_message(chat_id, 'Время вышло!')
 
 
-def wait(chat_id, msg, bot=bot):
+def wait(chat_id, msg, bot):
     seconds = parse(msg)
     if not seconds:
         bot.send_message(chat_id, 'Неверный формат времени')
@@ -38,10 +37,11 @@ def wait(chat_id, msg, bot=bot):
     bot.create_timer(seconds, last_message, chat_id=chat_id, bot=bot)
 
 
-def main(bot):
-    bot.reply_on_message(wait)
+def main():
+    bot = ptbot.Bot(TG_TOKEN)
+    bot.reply_on_message(wait, bot=bot)
     bot.run_bot()
 
 
 if __name__ == '__main__':
-    main(bot)
+    main()
